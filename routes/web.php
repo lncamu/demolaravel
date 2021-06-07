@@ -27,3 +27,6 @@ Route::get('/', function () {
 
 //crear una ruta para llamar al modelo empleado o a todas las url y trabajar con todos los metodos
 Route::resource('empleados',EmpleadoController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

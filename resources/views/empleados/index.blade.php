@@ -8,7 +8,7 @@
         <tr>
             <th>Id</th>
             <th>foto</th>
-            <th>Nombre</th>
+            <th>Nombre</tlocalhosth>
             <th>apellido paterno</th>
             <th>apellido materno</th>
             <th>Correo</th>
