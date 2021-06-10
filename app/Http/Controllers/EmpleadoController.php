@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\empleado;
+use App\Models\egreso_empleados;
+use App\Models\ingreso_empleado;
+use App\Models\ingreso_empleados;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class EmpleadoController extends Controller
 {
@@ -32,6 +36,7 @@ class EmpleadoController extends Controller
 
 
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -53,7 +58,7 @@ class EmpleadoController extends Controller
         empleado::insert($datosEmpleado); //agarro el modelo e inserto los datos del empleado menos el _token
 
         // return response()->json($datosEmpleado);
-        return redirect('empleados')->with('mensaje','Empleado registrado con éxito'); //mensaje con redireccionamiento
+        return redirect('empleados')->with('mensaje', 'Empleado registrado con éxito'); //mensaje con redireccionamiento
     }
 
 
@@ -66,11 +71,10 @@ class EmpleadoController extends Controller
      * @param  \App\Models\empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function show(empleado $empleado)
+    public function show($id)
     {
         //
     }
-
 
 
 
@@ -85,9 +89,15 @@ class EmpleadoController extends Controller
     {
         $empleado = empleado::findOrFail($id);  //busca la info con el id que le pasamos
 
-        //la inofrmacion q se muestra pasa por la vista osea por el archivo de esa acrpeta
-        return view('empleados.edit', compact('empleado')); //compac para pasar todos los datos
+        //la información que se muestra pasa por la vista osea por el archivo de esa carpeta
+        return view('empleados.edit', compact('empleado')); //compac para pasar todos los datos y editar
+
+
+
+
+
     }
+
 
 
 
@@ -115,7 +125,7 @@ class EmpleadoController extends Controller
         empleado::where('id', '=', $id)->update($datosEmpleado);
 
         $empleado = empleado::findOrFail($id);  //busca la info con el id que le pasamos
-        //la inofrmacion q se muestra pasa por la vista osea por el archivo de esa acrpeta
+        //la información que se muestra pasa por la vista osea por el archivo de esa carpeta
         return view('empleados.edit', compact('empleado')); //compac para pasar todos los datos
 
 
@@ -138,6 +148,6 @@ class EmpleadoController extends Controller
         if (Storage::delete('public/' . $empleado->foto)) {
             empleado::destroy($id);
         }
-        return redirect('empleados')->with('mensaje','Empleado borrado con éxito'); //mensaje con redireccionamiento
+        return redirect('empleados')->with('mensaje', 'Registro borrado con éxito'); //mensaje con redireccionamiento
     }
 }

@@ -1,4 +1,4 @@
-<h1>Formulario de {{ $modo }} datos de los empleados</h1>
+<h1>{{ $modo }} datos de los empleados</h1>
 
 <label for="Nombres">Nombres</label>
 <input type="text" name="nombre" title="Nombres " class="" placeholder="Nombres " value="{{ isset($empleado->nombre)?$empleado->nombre:'' }}" required> <br>
@@ -14,11 +14,11 @@
 
 <label for="Archivo de imagen">Foto</label>
 
-<input type="file" name="foto" title="Archivo de imagen" class="" placeholder="Archivo de imagen" value="{{ isset($empleado->foto)?$empleado->foto:'' }}" required> <br>
+<input type="file" name="foto" title="Archivo de imagen" class="" placeholder="Archivo de imagen" value="{{ isset($empleado->foto)?$empleado->foto:'' }}" required>
 @if(isset($empleado->foto))
 <img src="{{ asset('storage').'/'.$empleado->foto }}" alt="10%" width="10%"> <br>
 @endif
 
 <br>
-<input type="submit" value="{{ $modo }} datos">
-<a href="{{ url('/empleados/') }}" class="btn">Ver todos</a>
+<input type="submit" value="{{ $modo }} datos" class="btn btn-danger">
+<a href="{{ url('/empleados/') }}" class="btn btn-primary">Ver todos</a>
