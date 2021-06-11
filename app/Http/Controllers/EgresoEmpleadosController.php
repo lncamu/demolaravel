@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\egreso_empleados;
 use App\Models\empleado;
 use App\Models\conceptos;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,8 +18,12 @@ class EgresoEmpleadosController extends Controller
      */
     public function index()
     {
-        $datos['egreso_empleados'] = egreso_empleados::paginate(5); //variable para almacenar la informacion de la base y se la pase al index;
-        return view('egresos_empleados.index', $datos);
+        $egreso_empleados = DB::select('SELECT * FROM egreso_empleados eg
+                                    INNER JOIN conceptos cp ON
+                                        eg.conceptos_id = cp.id_conceptos
+                                    INNER JOIN empleados em ON
+                                        eg.empleado_id = em.id  ORDER BY nombre');
+        return view('egresos_empleados.index', ['egreso_empleados' => $egreso_empleados]);
     }
 
 

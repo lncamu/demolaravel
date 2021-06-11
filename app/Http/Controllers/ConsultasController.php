@@ -55,18 +55,15 @@ class ConsultasController extends Controller
      */
     public function show($id)
     {
-        $datos_ingresos = DB::select('SELECT
-                            empleados.id AS id_empleado,
-                            empleados.nombre AS nombre_empleado,
-                            empleados.apellido_paterno AS apellido_paterno,
-                            empleados.apellido_materno AS apellido_materno,
-                            conceptos.descripcion_conceptos AS descripcion_conceptos,
-                            ingreso_empleados.valor_ingreso AS valor_de_ingreso
-                        FROM
-                            ingreso_empleados
-                        INNER JOIN conceptos ON ingreso_empleados.conceptos_id = conceptos.id_conceptos
-                        INNER JOIN empleados ON ingreso_empleados.empleado_id = empleados.id 
-                        WHERE ingreso_empleados.empleado_id = ?', [$id]);
+        $datos_ingresos = DB::select('SELECT id, nombre, apellido_paterno,
+                                    ( select SUM(valor_ingreso) from ingreso_empleados
+                                            where empleado_id = empleados.id ) AS valor_de_ingreso,
+                                    ( select SUM(valor_egreso) from egreso_empleados
+                                            where empleado_id = empleados.id ) AS valor_de_egreso,
+                                    ( select SUM(valor_sueldo) from sueldos
+                                            where empleado_id = empleados.id ) AS valor_de_sueldo
+                                    from empleados
+                        WHERE empleados.id = ?', [$id]);
 
         return view('consultas.show', ['datos_ingresos' => $datos_ingresos]);
     }

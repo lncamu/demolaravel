@@ -6,6 +6,7 @@ use App\Models\ingreso_empleado;
 use App\Models\empleado;
 use App\Models\conceptos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IngresoEmpleadoController extends Controller
 {
@@ -16,8 +17,12 @@ class IngresoEmpleadoController extends Controller
      */
     public function index()
     {
-        $datos['ingreso_empleados'] = ingreso_empleado::paginate(5); //variable para almacenar la informacion de la base y se la pase al index;
-        return view('ingresos_empleados.index', $datos);
+        $ingreso_empleados = DB::select('SELECT * FROM ingreso_empleados ig
+                                        INNER JOIN conceptos cp ON
+                                            ig.conceptos_id = cp.id_conceptos
+                                        INNER JOIN empleados em ON
+                                            ig.empleado_id = em.id  ORDER BY nombre');
+        return view('ingresos_empleados.index', ['ingreso_empleados' => $ingreso_empleados]);
     }
 
     /**
@@ -93,7 +98,7 @@ class IngresoEmpleadoController extends Controller
      */
     public function destroy($id_ingreso)
     {
-        ingreso_empleado::where('id_egreso', $id_ingreso)->delete();
+        ingreso_empleado::where('id_ingreso', $id_ingreso)->delete();
         return redirect('ingresos_empleados')->with('mensaje', 'Registro borrado con éxito'); //mensaje con redireccionamiento
     }
 }

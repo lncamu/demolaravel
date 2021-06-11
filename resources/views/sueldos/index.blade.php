@@ -25,10 +25,10 @@
             @foreach($sueldos as $sueldo)
             <tr>
                 <td>{{$sueldo->id_sueldo}}</td>
-                <td>{{$sueldo->empleado_id}}</td>
+                <td>{{$sueldo->nombre}} {{$sueldo->apellido_paterno}}</td>
                 <td>{{$sueldo->valor_sueldo}}</td>
                 <td>
-                    <form action="{{ url('/sueldos/'.$sueldo->id_sueldos) }}" method="post" class="d-inline">
+                    <form action="{{ url('/sueldos/'.$sueldo->id_sueldo) }}" method="post" class="d-inline">
                         @csrf
                         {{ method_field('DELETE') }}
                         <input type="submit" onclick="return confirm('Quieres borrar')" value="Eliminar" class="btn btn-danger btn-sm">

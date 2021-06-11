@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\sueldo;
 use App\Models\empleado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SueldoController extends Controller
 {
@@ -15,8 +16,11 @@ class SueldoController extends Controller
      */
     public function index()
     {
-        $datos['sueldos'] = sueldo::paginate(5); //variable para almacenar la informacion de la base y se la pase al index;
-        return view('sueldos.index', $datos);
+        // $datos['sueldos'] = sueldo::paginate(5); //variable para almacenar la informacion de la base y se la pase al index;
+        // return view('sueldos.index', $datos);
+        $datos_sueldos = DB::select('SELECT * FROM sueldos s
+                                 INNER JOIN empleados em ON  s.empleado_id = em.id   ORDER BY nombre');
+        return view('sueldos.index', ['sueldos' => $datos_sueldos]);
     }
 
     /**

@@ -26,8 +26,8 @@
             @foreach($egreso_empleados as $egreso_empleado)
             <tr>
                 <td>{{$egreso_empleado->id_egreso}}</td>
-                <td>{{$egreso_empleado->empleado_id}}</td>
-                <td>{{$egreso_empleado->conceptos_id}}</td>
+                <td>{{$egreso_empleado->nombre}} {{$egreso_empleado->apellido_paterno}}</td>
+                <td>{{$egreso_empleado->descripcion_conceptos}}</td>
                 <td>{{$egreso_empleado->valor_egreso}}</td>
                 <td>
                     <form action="{{ url('/egresos_empleados/'.$egreso_empleado->id_egreso) }}" method="post" class="d-inline">

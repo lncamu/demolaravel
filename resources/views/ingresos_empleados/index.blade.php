@@ -22,14 +22,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($ingreso_empleados as $r)
+            @foreach($ingreso_empleados as $ingreso_empleado)
             <tr>
-                <td>{{$r->id_ingreso}}</td>
-                <td>{{$r->empleado_id}}</td>
-                <td>{{$r->conceptos_id}}</td>
-                <td>{{$r->valor_ingreso}}</td>
+                <td>{{$ingreso_empleado->id_ingreso}}</td>
+                <td>{{$ingreso_empleado->nombre}} {{$ingreso_empleado->apellido_paterno}}</td>
+                <td>{{$ingreso_empleado->descripcion_conceptos}}</td>
+                <td>{{$ingreso_empleado->valor_ingreso}}</td>
                 <td>
-                    <form action="{{ url('/ingresos_empleados/'.$r->id_ingreso) }}" method="post" class="d-inline">
+                    <form action="{{ url('/ingresos_empleados/'.$ingreso_empleado->id_ingreso) }}" method="post" class="d-inline">
                         @csrf
                         {{ method_field('DELETE') }}
                         <input type="submit" onclick="return confirm('Quieres borrar')" value="Eliminar" class="btn btn-danger btn-sm">
