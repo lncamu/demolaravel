@@ -18,18 +18,18 @@ class empleado extends Model
   //relacion uno a muchos con sueldo
   public function  sueldos()
   {
-    return $this->hasMany('App\Model\sueldo');
+    return $this->hasMany('App\Models\sueldo');
   }
 
   //relacion uno a muchos con ingresos
   public function  ingreso_empleados()
   {
-    return $this->hasMany('App\Model\ingreso_empleados');
+    return $this->hasMany('App\Models\ingreso_empleados');
   }
 
   //relacion uno a muchos con egresos
   public function  egreso_empleado()
   {
-    return $this->hasMany('App\Model\egreso_empleado');
+    return $this->hasMany('App\Models\egreso_empleado');
   }
 }
