@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class consultas extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+    public $table = "consultas_report_ingreso";
 }

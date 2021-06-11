@@ -93,7 +93,7 @@ class IngresoEmpleadoController extends Controller
      */
     public function destroy($id_ingreso)
     {
-        ingreso_empleado::destroy($id_ingreso);
+        ingreso_empleado::where('id_egreso', $id_ingreso)->delete();
         return redirect('ingresos_empleados')->with('mensaje', 'Registro borrado con éxito'); //mensaje con redireccionamiento
     }
 }

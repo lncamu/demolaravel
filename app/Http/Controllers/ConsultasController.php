@@ -18,8 +18,11 @@ class ConsultasController extends Controller
      */
     public function index()
     {
-        $consultas_report_ingresos['consultas_report_ingreso'] = consultas::paginate(5); //variable para almacenar la informacion de la base y se la pase al index;
-        return view('consultas.index', $consultas_report_ingresos);
+        // $consultas_report_ingresos['consultas_report_ingreso'] = consultas::paginate(5); //variable para almacenar la informacion de la base y se la pase al index;
+        // return view('consultas.index', $consultas_report_ingresos);
+        $datos_vista = consultas::select("*")
+            ->get();
+        return view('consultas.index', ['datos_vista' => $datos_vista]);
     }
 
 
@@ -66,21 +69,6 @@ class ConsultasController extends Controller
                         WHERE ingreso_empleados.empleado_id = ?', [$id]);
 
         return view('consultas.show', ['datos_ingresos' => $datos_ingresos]);
-
-        //         $datos_egresos = DB::select('SELECT
-        //         empleados.id AS id_empleado,
-        //         empleados.nombre AS nombre_empleado,
-        //         empleados.apellido_paterno AS apellido_paterno,
-        //         empleados.apellido_materno AS apellido_materno,
-        //         conceptos.descripcion_conceptos AS descripcion_conceptos,
-        //         egreso_empleados.valor_egreso AS valor_de_egreso
-        //     FROM
-        //         egreso_empleados
-        //     INNER JOIN conceptos ON egreso_empleados.conceptos_id = conceptos.id_conceptos
-        //     INNER JOIN empleados ON egreso_empleados.empleado_id = empleados.id 
-        //     WHERE egreso_empleados.empleado_id = ?', [$id]);
-
-        // return view('consultas.show', ['datos_egresos' => $datos_egresos]);
     }
 
 

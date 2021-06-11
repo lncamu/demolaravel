@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($consultas_report_ingreso as $consultas_report_ingresoa)
+            @foreach($datos_vista as $consultas_report_ingresoa)
             <tr>
                 <td>{{$consultas_report_ingresoa->nombre_empleado}}</td>
                 <td>{{$consultas_report_ingresoa->apellido_paterno}}</td>

@@ -104,7 +104,8 @@ class ConceptosController extends Controller
      */
     public function destroy($id_conceptos)
     {
-        conceptos::destroy($id_conceptos);
+        conceptos::where('id_conceptos', $id_conceptos)->delete();
+        // conceptos::destroy($id_conceptos);
         return redirect('conceptos')->with('mensaje', 'Registro borrado con éxito'); //mensaje con redireccionamiento
     }
 }

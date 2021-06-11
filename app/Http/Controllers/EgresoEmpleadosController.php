@@ -107,7 +107,7 @@ class EgresoEmpleadosController extends Controller
      */
     public function destroy($id_egreso)
     {
-        egreso_empleados::destroy($id_egreso);
+        egreso_empleados::where('id_egreso', $id_egreso)->delete();
         return redirect('egresos_empleados')->with('mensaje', 'Registro borrado con éxito'); //mensaje con redireccionamiento
     }
 }
