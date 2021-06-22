@@ -95,7 +95,7 @@ class SueldoController extends Controller
      */
     public function destroy($id_sueldo)
     {
-        sueldo::destroy($id_sueldo);
-        return redirect('sueldo')->with('mensaje', 'Registro borrado con éxito'); //mensaje con redireccionamiento
+        sueldo::where('id_sueldo', $id_sueldo)->delete();
+        return redirect('sueldos')->with('mensaje', 'Registro borrado con éxito'); //mensaje con redireccionamiento
     }
 }
